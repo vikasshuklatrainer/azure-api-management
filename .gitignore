@@ -1,0 +1,5 @@
+bin/
+obj/
+out/
+.DS_Store
+/.vs
