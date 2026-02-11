@@ -60,6 +60,7 @@ Now that you know how the fundamental components of Azure API Management work to
 Provision Azure API Management with Azure CLI
 Azure offers different management interfaces used by customers to create and maintain services like Azure API Management. All infrastructure-related operations in this article are done via Azure CLI. Resources in Azure are deployed into an Azure Resource Group, and Azure API Management is no exception. The following script creates a new Azure Resource Group and deploys an instance of Azure API Management into it. Please keep in mind that provisioning new instances of Azure API Management could take quite some time. We have seen APIM deployments taking 30+ minutes, depending on the chosen Azure region and the chosen [APIM pricing tier] (https://docs.microsoft.com/en-us/azure/api-management/api-management-features).
 
+```plaintext
 # select the desired Azure subscription
 ## get a list of all available Azure subscriptions for the current user
 az account list
@@ -87,9 +88,12 @@ az apim create -n $APIM_NAME \
   --sku-name Developer \
   --sku-capacity 1 \
   --tags app='Azure API Management Sample'
+```
+
 Provision Sample Backends to Azure App Services With Azure CLI
 To demonstrate the onboarding of backend services, we will use two simple ASP.NET Core APIs deployed to Azure App Services. See the following Azure CLI script, responsible for provisioning both Azure App Services and the mandatory Azure App Service Plan. Once provisioning has finished, sample API projects will be deployed to the corresponding Azure App Services using ZIP package deployment:
 
+```plaintext
 # create an Azure App Service Plan
 AZ_REGION=westeurope
 RG_NAME=rg-apim-sample
@@ -136,6 +140,8 @@ az webapp deployment source config-zip -n $APP_SERVICE_CUSTOMERS_NAME \
 az webapp deployment source config-zip -n $APP_SERVICE_PRODUCTS_NAME \
   -g $RG_NAME \
   --src ProductsAPI.zip
+```
+
 Onboard Backend APIs in Azure API Management
 First, both backend APIs have to be onboarded to Azure API Management. APIM supports a couple of different specifications; you can use to import existing backend services including:
 
@@ -145,6 +151,7 @@ WSDL
 WADL
 The sample backend services expose an Open API specification, which has been created using the popular Swashbuckle package for .NET Core. This allows us to import all operations from the backend services quickly using Azure CLI:
 
+```plaintext
 APIM_NAME=apim-sample-2020
 RG_NAME=rg-apim-sample
 
@@ -167,6 +174,8 @@ az apim api import -n $APIM_NAME -g $RG_NAME \
   --display-name "Products API" \
   --api-type http \
   --service-url https://as-apim-2020-products.azurewebsites.net/
+```
+
 Now that the onboarding process is completed, you can throw in additional APIM concepts such as APIM Products to group underlying APIs logically, customize their representation in the API documentation, control access, and modify overall request/response behavior.
 
 As of August 2020, not all aspects of Azure APIM can be scripted using Azure CLI. APIM Products, for example, can not be managed using Azure CLI. However, you can still use Azure Portal to create and manage APIM Products. When using the Azure Portal, you also get integrity checks when applying custom policies on APIM Products, APIM APIs, or APIM API Operations.
