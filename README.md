@@ -5,31 +5,29 @@ This repository contains a sample application used to demonstrate several capabi
 At the point of creating this example, full automation using Azure CLI is not supported. Consider reading the corresponding article on [thinktecture.com](https://thinktecture.com) for more fine-granular guidance. 
 
 
-Azure API Management Features
+### Azure API Management Features
 Azure APIM provides essential features to run scalable, mission-critical APIs such as:
 
-Authentication by relying on industry standards such as OAuth 2.0 and OpenID Connect
-Usage quotas and rate limits can be enforced
-Response caching to optimize API performance
-Request transformation can be configured per API using a domain-specific language
-Gather metrics for further analysis using services such as Azure Monitor
+Authentication by relying on industry standards such as OAuth 2.0 and OpenID Connect Usage quotas and rate limits can be enforced Response caching to optimize API performance Request transformation can be configured per API using a domain-specific language Gather metrics for further analysis using services such as Azure Monitor
 On top of those features, Azure APIM exposes a customizable developer portal, which API consumers use to:
 
-read the API documentation and browse through API operations and products
-try out APIs using the interactive API console
-Onboard themselves to receive API subscription keys
+read the API documentation and browse through API operations and products try out APIs using the interactive API console Onboard themselves to receive API subscription keys
 
-Azure API Management Terminology
+### Azure API Management Terminology
 Azure APIM introduces several terms that every user should know and be aware of to unleash the full potential offered by Azure API Management.
 
-APIM Product – An APIM Product contains one or multiple APIs. It can specify customizations like rate limiting, quotas, and dedicated terms of use. Developers can browse through different products using the APIM developer portal.
-APIM API (Frontend API) – An API facade that sits in front of a backend API. It allows customization of request and response, without modifying existing backend APIs.
+**APIM Product** – An APIM Product contains one or multiple APIs. It can specify customizations like rate limiting, quotas, and dedicated terms of use. Developers can browse through different products using the APIM developer portal.
+
+**APIM API (Frontend API)** – An API facade that sits in front of a backend API. It allows customization of request and response, without modifying existing backend APIs.
 APIM API Operation – An APIM API Operation represents a unique API endpoint exposed by Azure APIM. In addition to acting as a facade for existing backend services, an APIM API Operation can also return mock responses. This is especially useful while designing the API and negotiating public API contracts with API consumers.
-APIM Subscription – Subscriptions are an easy way to add basic authentication using subscription keys to exposed APIs. After registering for APIM Products and/or APIs, users receive subscription keys, which they have to include into API requests when interacting with the API.
+
+**APIM Subscription** – Subscriptions are an easy way to add basic authentication using subscription keys to exposed APIs. After registering for APIM Products and/or APIs, users receive subscription keys, which they have to include into API requests when interacting with the API.
 Backend Service – A Backend Service exposes some API used to solve a business requirement.
-APIM Policy – An APIM Policy is used to control, tune, and mutate both requests and responses.
+
+**APIM Policy** – An APIM Policy is used to control, tune, and mutate both requests and responses.
 Version – APIs evolve over time, with APIM users can create, publish and remove versions; API consumers can browse through different API versions using the developer portal.
-Azure API Management Architecture
+
+### Azure API Management Architecture
 Having a basic understanding of Azure APIM terminology, it is crucial to know how the different entities work together. Typically, external users or services want to consume APIs. Once backend services have been onboarded to Azure API Management, the corresponding APIM APIs (or Frontend APIs) are created inside your APIM instance. APIM creates corresponding APIM API Operations for API endpoints exposed from the backend services.
 
 ![Azure Api Management Architecture 1](https://www.thinktecture.com/storage/2022/02/azure-api-management-architecture-1.png)
